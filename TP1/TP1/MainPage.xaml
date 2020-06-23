@@ -17,7 +17,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
-        <ContentView BackgroundColor="#58B0F0" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+        <ContentView BackgroundColor="#58B0F0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid Margin="10, 25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -33,13 +33,17 @@
             </Grid>
         </ContentView>
         <ContentView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            <ScrollView HorizontalOptions="FillAndExpand">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <ContentView  HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Grid  HorizontalOptions="FillAndExpand">
+            <!--<ScrollView HorizontalOptions="FillAndExpand">-->
+            <ScrollView>
+                <!--<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
+                <StackLayout>
+                    <!--<ContentView  HorizontalOptions="FillAndExpand">-->
+                    <ContentView>
+                        <!--<Grid HorizontalOptions="FillAndExpand">-->
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="75"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="25"/>
                             </Grid.ColumnDefinitions>
@@ -55,8 +59,10 @@
 convallis dolor. Quisque ultricies porttitor nunc venenatis facilisis." Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></Label>
                         </Grid>
                     </ContentView>
-                    <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <!--<ContentView HorizontalOptions="FillAndExpand" VerticalOptions="Fill">-->
+                    <ContentView>
+                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
+                        <StackLayout Orientation="Horizontal">
                             <Label TextColor="Black" Text="Répondre" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"></Label>
                             <Label TextColor="Black" Text="Retweet" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"></Label>
                             <Label TextColor="Black" Text="Favoris" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"></Label>
