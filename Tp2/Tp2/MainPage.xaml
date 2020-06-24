@@ -16,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <ContentView BackgroundColor="#58B0F0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
@@ -34,6 +35,18 @@
             </Grid>
         </ContentView>
         <ContentView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackLayout>
+                <Label Text="Connexion à twitter" TextColor="Gray" HorizontalOptions="CenterAndExpand"></Label>
+                <Entry Placeholder="Identifiant twitter" HorizontalOptions="FillAndExpand"/>
+                <Entry Placeholder="Mot de passe" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+                <StackLayout Orientation="Horizontal">
+                    <Switch/>
+                    <Label Text="Mémoriser mes informations" TextColor="Gray" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <Button Text="SE CONNECTER" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </ContentView>
+        <ContentView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <!--<ScrollView HorizontalOptions="FillAndExpand">-->
             <ScrollView>
                 <!--<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
@@ -247,7 +260,7 @@ convallis dolor. Quisque ultricies porttitor nunc venenatis facilisis." Grid.Row
                 </StackLayout>
             </ScrollView>
         </ContentView>
-        <ContentView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+        <ContentView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
             <StackLayout Orientation="Horizontal">
                 <Label TextColor="Gray" Text="Fil" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                 <Label TextColor="Gray" Text="Notification" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
