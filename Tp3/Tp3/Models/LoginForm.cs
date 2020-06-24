@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Xamarin.Forms;
 
@@ -9,11 +10,11 @@ namespace Tp3.Models
     {
         public Entry Login { get; }
         public Entry Password { get; }
-        public Switch IsRemind { get; }
+        public Xamarin.Forms.Switch IsRemind { get; }
         public VisibilitySwitch VisibilitySwitch { get; }
         public ErrorForm Error { get; }
 
-        public LoginForm(Entry login, Entry password, Switch isRemind, View loginForm, View tweetForm, Label errorLabel, Button button)
+        public LoginForm(Entry login, Entry password, Xamarin.Forms.Switch isRemind, View loginForm, View tweetForm, Label errorLabel, Button button)
         {
             this.Login = login;
             this.Password = password;
@@ -25,7 +26,7 @@ namespace Tp3.Models
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("btn clicked");
+            Debug.WriteLine("btn clicked");
             if (this.IsValid())
             {
                 this.Error.Hide();
