@@ -41,9 +41,9 @@
                                         <ContentView>
                                             <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
                                             <StackLayout Orientation="Horizontal" HeightRequest="30">
-                                                <ImageButton Source="{utils:ImageFromResources Tp5.Images.reply.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
-                                                <ImageButton Source="{utils:ImageFromResources Tp5.Images.retweet.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
-                                                <ImageButton Source="{utils:ImageFromResources Tp5.Images.favorite.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                                <ImageButton Source="{utils:ImageFromResources Tp6.Images.reply.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                                <ImageButton Source="{utils:ImageFromResources Tp6.Images.retweet.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                                <ImageButton Source="{utils:ImageFromResources Tp6.Images.favorite.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
                                             </StackLayout>
                                         </ContentView>
                                     </StackLayout>
