@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ENI_Xamarin_30032020.Views.ConnectionView"
+             xmlns:utils="clr-namespace:ENI_Xamarin_30032020.Utils"
+             BindingContext="{Binding ConnectionViewModel, Source={StaticResource Locator}}">
+
+    <StackLayout>
+        <Label Text="Connexion à twitter" TextColor="Gray" HorizontalOptions="CenterAndExpand"></Label>
+        <Entry Placeholder="Identifiant twitter" Text="{Binding User.Login}" HorizontalOptions="FillAndExpand"/>
+        <Entry Placeholder="Mot de passe"  Text="{Binding User.Password}" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding SavingValues, Mode=TwoWay}"/>
+            <Label Text="Mémoriser mes informations" TextColor="Gray" VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+        <Label Text="{Binding ErrorSwitch.ErrorText, Mode=TwoWay}" TextColor="{Binding ErrorSwitch.ErrorColor, Mode=TwoWay}" IsVisible="{Binding ErrorSwitch.IsErrorVisible, Mode=TwoWay}"/>
+        <Button Text="SE CONNECTER" HorizontalOptions="FillAndExpand" Command="{Binding ConnectionClicked}"/>
+    </StackLayout>
+</ContentView>

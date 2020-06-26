@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ENI_Xamarin_30032020.Views.HeaderView"
+             xmlns:utils="clr-namespace:ENI_Xamarin_30032020.Utils"
+             BindingContext="{Binding HeaderViewModel, Source={StaticResource Locator}}">
+
+    <StackLayout Margin="10, 25" Orientation="Horizontal">
+        <ImageButton Command="{Binding CreateClicked}" Source="{utils:ImageFromResources ENI_Xamarin_30032020.Images.pencil.png}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+        <Label TextColor="White" Text="Accueil" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+        <ImageButton Command="{Binding SearchClicked}" Source="{utils:ImageFromResources ENI_Xamarin_30032020.Images.search.png}"  VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"/>
+    </StackLayout>
+</ContentView>

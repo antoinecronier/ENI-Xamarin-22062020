@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ENI_Xamarin_30032020.MainPage"
+             xmlns:utils="clr-namespace:ENI_Xamarin_30032020.Utils"
+             xmlns:views="clr-namespace:ENI_Xamarin_30032020.Views"
+             BindingContext="{Binding MainPageViewModel, Source={StaticResource Locator}}"
+             >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <views:HeaderView BackgroundColor="#58B0F0" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <views:ConnectionView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+        <views:FooterView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+    </Grid>
+
+</ContentPage>

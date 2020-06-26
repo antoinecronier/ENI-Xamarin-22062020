@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ENI_Xamarin_30032020.Views.TweetsView"
+             xmlns:utils="clr-namespace:ENI_Xamarin_30032020.Utils"
+             xmlns:views="clr-namespace:ENI_Xamarin_30032020.Views"
+             BindingContext="{Binding TweetsViewModel, Source={StaticResource Locator}}">
+
+    <ListView ItemsSource="{Binding Tweets}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout VerticalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="https://picsum.photos/50/50/?random.jpg"/>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding User.Login, Mode=TwoWay}"/>
+                                        <Label Text="{Binding User.Pseudo, Mode=TwoWay}"/>
+                                        <Label Text="{Binding CreationDate, Mode=TwoWay}" TextColor="Gray" HorizontalOptions="End"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding Content, Mode=TwoWay}" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <ImageButton Source="{utils:ImageFromResources ENI_Xamarin_30032020.Images.reply.png}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <ImageButton Source="{utils:ImageFromResources ENI_Xamarin_30032020.Images.retweet.png}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <ImageButton Source="{utils:ImageFromResources ENI_Xamarin_30032020.Images.favorite.png}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentView>
