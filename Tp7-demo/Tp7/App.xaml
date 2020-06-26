@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Tp7.Configurations"
+             mc:Ignorable="d"
+             x:Class="Tp7.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator xmlns:vm="using:Tp7.Configurations" x:Key="Locator" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
