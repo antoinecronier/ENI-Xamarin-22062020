@@ -15,9 +15,8 @@ namespace Tp7Correction.Configurations
     {
         public enum Pages
         {
-            ExamplePage,
-            ExamplePage2,
             MainPage,
+            TweetsPage,
         }
 
         public ViewModelLocator()
@@ -27,8 +26,7 @@ namespace Tp7Correction.Configurations
             SimpleIoc.Default.Register<INavigationService>(() =>
             {
                 var navigationService = NavigationService.Instance;
-                navigationService.Configure(Pages.ExamplePage.ToString(), typeof(ExamplePage));
-                navigationService.Configure(Pages.ExamplePage2.ToString(), typeof(ExamplePage2));
+                navigationService.Configure(Pages.TweetsPage.ToString(), typeof(TweetsPage));
                 navigationService.Configure(Pages.MainPage.ToString(), typeof(MainPage));
                 return navigationService;
             });
@@ -38,22 +36,22 @@ namespace Tp7Correction.Configurations
                 return new TwitterService();
             });
 
-            SimpleIoc.Default.Register<ExampleViewModel>();
-            SimpleIoc.Default.Register<ExampleViewModel2>();
+            SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<TweetsPageViewModel>();
         }
 
-        public ExampleViewModel ExampleViewModel
+        public MainPageViewModel MainPageViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ExampleViewModel>();
+                return ServiceLocator.Current.GetInstance<MainPageViewModel>();
             }
         }
-        public ExampleViewModel2 ExampleViewModel2
+        public TweetsPageViewModel TweetsPageViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ExampleViewModel2>();
+                return ServiceLocator.Current.GetInstance<TweetsPageViewModel>();
             }
         }
     }

@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:views="clr-namespace:Tp7Correction.Views"
-             x:Class="Tp7Correction.MainPage">
+             x:Class="Tp7Correction.Pages.MainPage"
+             BindingContext="{Binding MainPageViewModel, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,14 +23,14 @@
         <ContentView x:Name="connectionForm" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
             <StackLayout>
                 <Label Text="Connexion à twitter" TextColor="Gray" HorizontalOptions="CenterAndExpand"></Label>
-                <Entry x:Name="login" Placeholder="Identifiant twitter" HorizontalOptions="FillAndExpand"/>
-                <Entry x:Name="password" Placeholder="Mot de passe" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+                <Entry Text="{Binding User.Login, Mode=TwoWay}" Placeholder="Identifiant twitter" HorizontalOptions="FillAndExpand"/>
+                <Entry Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Mot de passe" IsPassword="True" HorizontalOptions="FillAndExpand"/>
                 <StackLayout Orientation="Horizontal">
-                    <Switch x:Name="isRemind"/>
+                    <Switch/>
                     <Label Text="Mémoriser mes informations" TextColor="Gray" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
-                <Label x:Name="errorLabel" TextColor="DarkRed"/>
-                <Button x:Name="btnConnexion" Text="SE CONNECTER" HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding Error.Data}" TextColor="{Binding Error.TextColor}" BackgroundColor="{Binding Error.BackgroundColor}" IsVisible="{Binding Error.IsVisible}"/>
+                <Button Text="SE CONNECTER" Command="{Binding TweetsPageNavigate}" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
         </ContentView>
         <views:FooterView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"/>

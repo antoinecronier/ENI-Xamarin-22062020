@@ -10,7 +10,7 @@ using Tp7Correction.Utils;
 
 namespace Tp7Correction.ViewModel
 {
-    public class ExampleViewModel2 : ViewModelBase
+    public class TweetsPageViewModel : ViewModelBase
     {
         private INavigationService navigation;
         private User user;
@@ -25,7 +25,7 @@ namespace Tp7Correction.ViewModel
             }
         }
 
-        public ExampleViewModel2(INavigationService navigation)
+        public TweetsPageViewModel(INavigationService navigation)
         {
             this.user = new User();
             this.navigation = navigation;
@@ -40,7 +40,7 @@ namespace Tp7Correction.ViewModel
                     changedUser.Login = RandomUtil.GetString();
                     changedUser.Password = RandomUtil.GetString();
 
-                    Messenger.Default.Send<GenericMessage<User>, ExampleViewModel2>(new GenericMessage<User>(changedUser));
+                    Messenger.Default.Send<GenericMessage<User>, TweetsPageViewModel>(new GenericMessage<User>(changedUser));
                 }
             });
         }

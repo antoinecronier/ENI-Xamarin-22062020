@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tp7Correction.Entities
 {
-    public class BaseEntity : INotifyPropertyChanged
+    public class BaseNotyfied : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

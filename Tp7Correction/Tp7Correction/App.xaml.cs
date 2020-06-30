@@ -12,7 +12,7 @@ namespace Tp7Correction
         {
             InitializeComponent();
 
-            var firstPage = new NavigationPage(new ExamplePage());
+            var firstPage = new NavigationPage(new MainPage());
             NavigationService.Instance.Initialize(firstPage);
 
             MainPage = firstPage;

@@ -9,25 +9,22 @@ using Xamarin.Forms;
 using Tp7Correction.Entities;
 using Tp7Correction.Services;
 using Tp7Correction.Models;
+using GalaSoft.MvvmLight.Messaging;
+using Tp7Correction.ViewModel;
 
-namespace Tp7Correction
+namespace Tp7Correction.Pages
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
             InitializeComponent();
-            new LoginForm(this.login, this.password, this.isRemind, this.errorLabel, this.btnConnexion, this.Navigation);
         }
 
         protected override void OnAppearing()
         {
-            this.login.Text = "";
-            this.password.Text = "";
-            this.isRemind.IsToggled = false;
+            Messenger.Default.Send<MessageBase, MainPageViewModel>(new MessageBase());
             base.OnAppearing();
         }
     }

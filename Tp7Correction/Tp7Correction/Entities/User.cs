@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tp7Correction.Entities
 {
-    public class User : BaseEntity, BaseDbEntity
+    public class User : BaseNotyfied, BaseDbEntity
     {
         private int id;
         private String login;

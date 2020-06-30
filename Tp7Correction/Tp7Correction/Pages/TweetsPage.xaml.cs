@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Tp7Correction.Services;
 
 namespace Tp7Correction.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExamplePage : ContentPage
+    public partial class TweetsPage : ContentPage
     {
-        public ExamplePage()
+        public TweetsPage()
         {
             InitializeComponent();
+            this.listView.ItemsSource = new TwitterService().Tweets;
         }
     }
 }

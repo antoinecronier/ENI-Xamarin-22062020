@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              xmlns:utils="clr-namespace:Tp7Correction.Utils"
              xmlns:views="clr-namespace:Tp7Correction.Views"
-             x:Class="Tp7Correction.TweetsPage">
+             x:Class="Tp7Correction.Pages.TweetsPage"
+             BindingContext="{Binding TweetsPageViewModel, Source={StaticResource Locator}}">
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView BackgroundColor="#58B0F0"/>

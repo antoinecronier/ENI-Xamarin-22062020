@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tp7Correction.Entities
 {
-    public class Tweet : BaseDbEntity
+    public class Tweet : BaseNotyfied, BaseDbEntity
     {
         private int id;
         private User user;
@@ -14,17 +14,29 @@ namespace Tp7Correction.Entities
         public User User
         {
             get { return user; }
-            set { user = value; }
+            set 
+            { 
+                user = value;
+                this.OnPropertyChanged("User");
+            }
         }
         public String Data
         {
             get { return data; }
-            set { data = value; }
+            set 
+            { 
+                data = value;
+                this.OnPropertyChanged("Data");
+            }
         }
         public DateTime CreatedAt
         {
             get { return createdAt; }
-            set { createdAt = value; }
+            set 
+            { 
+                createdAt = value;
+                this.OnPropertyChanged("CreatedAt");
+            }
         }
 
         public int Id { get => this.id; set => this.id = value; }
