@@ -11,7 +11,7 @@
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView BackgroundColor="#58B0F0"/>
-            <views:SearchView IsVisible="{Binding SearchVisibility, Mode=TwoWay}"/>
+            <views:SearchView IsVisible="{Binding SearchVisibility}"/>
             <ListView ItemsSource="{Binding Tweets}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

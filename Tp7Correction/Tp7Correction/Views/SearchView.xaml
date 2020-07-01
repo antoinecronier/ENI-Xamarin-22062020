@@ -7,14 +7,16 @@
              x:Class="Tp7Correction.Views.SearchView"
              BindingContext="{Binding SearchViewModel, Source={StaticResource Locator}}">
   <ContentView.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                <Label Text="Date" HorizontalOptions="CenterAndExpand"/>
-                <DatePicker Date="{Binding Search.SearchDate}" HorizontalOptions="CenterAndExpand"/>
+        <StackLayout IsVisible="{Binding Visibility}">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding Search.SearchDate}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <CheckBox IsChecked="{Binding Search.SearchDateChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                <Label Text="Utilisateur" HorizontalOptions="CenterAndExpand"/>
-                <Entry Text="{Binding Search.Username}" HorizontalOptions="CenterAndExpand"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Utilisateur" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Entry Text="{Binding Search.Username}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <CheckBox IsChecked="{Binding Search.UsernameChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
             </StackLayout>
             <Button Text="Rechercher" Command="{Binding SearchClick}"/>
         </StackLayout>

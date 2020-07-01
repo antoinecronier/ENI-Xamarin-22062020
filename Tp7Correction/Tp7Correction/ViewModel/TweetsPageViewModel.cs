@@ -29,6 +29,7 @@ namespace Tp7Correction.ViewModel
             { 
                 this.searchVisibility = value;
                 this.RaisePropertyChanged();
+                Messenger.Default.Send<GenericMessage<Boolean>, SearchViewModel>(new GenericMessage<bool>(this.searchVisibility));
             }
         }
 
@@ -48,9 +49,39 @@ namespace Tp7Correction.ViewModel
         private void SearchNeeded(GenericMessage<TweetSearch> msg)
         {
             this.Tweets.Clear();
-            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(msg.Content.Username)))
+
+            bool usernameSearch = msg.Content.UsernameChecked;
+            bool dateSearch = msg.Content.SearchDateChecked;
+            String username = msg.Content.Username;
+            DateTime dateTime = msg.Content.SearchDate;
+
+            if (usernameSearch && dateSearch)
             {
-                this.Tweets.Add(tweet);
+                foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1))
+                {
+                    this.Tweets.Add(tweet);
+                }
+            }
+            else if (usernameSearch)
+            {
+                foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)))
+                {
+                    this.Tweets.Add(tweet);
+                }
+            }
+            else if (dateSearch)
+            {
+                foreach (var tweet in this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1))
+                {
+                    this.Tweets.Add(tweet);
+                }
+            }
+            else
+            {
+                foreach (var tweet in this.twitterService.Tweets)
+                {
+                    this.Tweets.Add(tweet);
+                }
             }
         }
 

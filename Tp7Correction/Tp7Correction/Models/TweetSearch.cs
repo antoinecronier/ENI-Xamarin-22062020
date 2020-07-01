@@ -19,6 +19,18 @@ namespace Tp7Correction.Models
             }
         }
 
+        private bool searchDateChecked;
+
+        public bool SearchDateChecked
+        {
+            get { return searchDateChecked; }
+            set 
+            { 
+                searchDateChecked = value;
+                this.OnPropertyChanged("SearchDateChecked");
+            }
+        }
+
         private String username;
 
         public String Username
@@ -31,6 +43,17 @@ namespace Tp7Correction.Models
             }
         }
 
+        private bool usernameChecked;
+
+        public bool UsernameChecked
+        {
+            get { return usernameChecked; }
+            set
+            {
+                usernameChecked = value;
+                this.OnPropertyChanged("UsernameChecked");
+            }
+        }
         public TweetSearch()
         {
 

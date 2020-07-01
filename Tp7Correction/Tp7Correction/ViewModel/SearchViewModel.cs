@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
@@ -8,9 +9,21 @@ using Tp7Correction.Models;
 
 namespace Tp7Correction.ViewModel
 {
-    public class SearchViewModel
+    public class SearchViewModel : ViewModelBase
     {
         private INavigationService navigation;
+
+        private Boolean visibility;
+
+        public Boolean Visibility
+        {
+            get { return visibility; }
+            set 
+            { 
+                visibility = value;
+                this.RaisePropertyChanged();
+            }
+        }
 
         public TweetSearch Search { get; }
 
@@ -31,8 +44,16 @@ namespace Tp7Correction.ViewModel
         public SearchViewModel(INavigationService navigation)
         {
             this.Search = new TweetSearch();
+            this.Search.SearchDate = DateTime.Now;
 
             this.navigation = navigation;
+
+            Messenger.Default.Register<GenericMessage<Boolean>>(this, this.VisibilityChanged);
+        }
+
+        private void VisibilityChanged(GenericMessage<bool> msg)
+        {
+            this.Visibility = msg.Content;
         }
     }
 }
