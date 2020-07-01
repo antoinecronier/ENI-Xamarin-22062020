@@ -11,7 +11,21 @@
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView BackgroundColor="#58B0F0"/>
-            <views:SearchView IsVisible="{Binding SearchVisibility}"/>
+            <ContentView IsVisible="{Binding SearchVisibility}">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding Search.SearchDate}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <CheckBox IsChecked="{Binding Search.SearchDateChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Utilisateur" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <Entry Text="{Binding Search.Username}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <CheckBox IsChecked="{Binding Search.UsernameChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Button Text="Rechercher" Command="{Binding SearchClick}"/>
+                </StackLayout>
+            </ContentView>
             <ListView ItemsSource="{Binding Tweets}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

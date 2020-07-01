@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
@@ -29,7 +30,55 @@ namespace Tp7Correction.ViewModel
             { 
                 this.searchVisibility = value;
                 this.RaisePropertyChanged();
-                Messenger.Default.Send<GenericMessage<Boolean>, SearchViewModel>(new GenericMessage<bool>(this.searchVisibility));
+            }
+        }
+        public TweetSearch Search { get; }
+
+        public RelayCommand SearchClick
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (this.navigation.CurrentPageKey == Configurations.ViewModelLocator.Pages.TweetsPage.ToString())
+                    {
+                        this.Tweets.Clear();
+
+                        bool usernameSearch = this.Search.UsernameChecked;
+                        bool dateSearch = this.Search.SearchDateChecked;
+                        String username = this.Search.Username;
+                        DateTime dateTime = this.Search.SearchDate;
+
+                        if (usernameSearch && dateSearch)
+                        {
+                            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1))
+                            {
+                                this.Tweets.Add(tweet);
+                            }
+                        }
+                        else if (usernameSearch)
+                        {
+                            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)))
+                            {
+                                this.Tweets.Add(tweet);
+                            }
+                        }
+                        else if (dateSearch)
+                        {
+                            foreach (var tweet in this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1))
+                            {
+                                this.Tweets.Add(tweet);
+                            }
+                        }
+                        else
+                        {
+                            foreach (var tweet in this.twitterService.Tweets)
+                            {
+                                this.Tweets.Add(tweet);
+                            }
+                        }
+                    }
+                });
             }
         }
 
@@ -37,52 +86,14 @@ namespace Tp7Correction.ViewModel
         {
             this.Tweets = new ObservableCollection<Tweet>();
             this.SearchVisibility = false;
+            this.Search = new TweetSearch();
+            this.Search.SearchDate = DateTime.Now;
 
             this.navigation = navigation;
             this.twitterService = twitterService;
 
             Messenger.Default.Register<MessageBase>(this, PageLoaded);
             Messenger.Default.Register<GenericMessage<int>>(this, Notifyed);
-            Messenger.Default.Register<GenericMessage<TweetSearch>>(this, SearchNeeded);
-        }
-
-        private void SearchNeeded(GenericMessage<TweetSearch> msg)
-        {
-            this.Tweets.Clear();
-
-            bool usernameSearch = msg.Content.UsernameChecked;
-            bool dateSearch = msg.Content.SearchDateChecked;
-            String username = msg.Content.Username;
-            DateTime dateTime = msg.Content.SearchDate;
-
-            if (usernameSearch && dateSearch)
-            {
-                foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1))
-                {
-                    this.Tweets.Add(tweet);
-                }
-            }
-            else if (usernameSearch)
-            {
-                foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)))
-                {
-                    this.Tweets.Add(tweet);
-                }
-            }
-            else if (dateSearch)
-            {
-                foreach (var tweet in this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1))
-                {
-                    this.Tweets.Add(tweet);
-                }
-            }
-            else
-            {
-                foreach (var tweet in this.twitterService.Tweets)
-                {
-                    this.Tweets.Add(tweet);
-                }
-            }
         }
 
         private void Notifyed(GenericMessage<int> msg)
