@@ -11,7 +11,8 @@
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView BackgroundColor="#58B0F0"/>
-            <ListView x:Name="listView">
+            <views:SearchView IsVisible="{Binding SearchVisibility, Mode=TwoWay}"/>
+            <ListView ItemsSource="{Binding Tweets}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -41,9 +42,9 @@
                                     <ContentView>
                                         <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
                                         <StackLayout Orientation="Horizontal" HeightRequest="30">
-                                            <ImageButton Source="{utils:ImageFromResources Tp5.Images.reply.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
-                                            <ImageButton Source="{utils:ImageFromResources Tp5.Images.retweet.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
-                                            <ImageButton Source="{utils:ImageFromResources Tp5.Images.favorite.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                            <ImageButton Source="{utils:ImageFromResources Tp7Correction.Images.reply.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                            <ImageButton Source="{utils:ImageFromResources Tp7Correction.Images.retweet.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                            <ImageButton Source="{utils:ImageFromResources Tp7Correction.Images.favorite.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
                                         </StackLayout>
                                     </ContentView>
                                 </StackLayout>

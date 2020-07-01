@@ -38,6 +38,8 @@ namespace Tp7Correction.Configurations
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<TweetsPageViewModel>();
+            SimpleIoc.Default.Register<HeaderViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>();
         }
 
         public MainPageViewModel MainPageViewModel
@@ -52,6 +54,22 @@ namespace Tp7Correction.Configurations
             get
             {
                 return ServiceLocator.Current.GetInstance<TweetsPageViewModel>();
+            }
+        }
+
+        public HeaderViewModel HeaderViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HeaderViewModel>();
+            }
+        }
+
+        public SearchViewModel SearchViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SearchViewModel>();
             }
         }
     }

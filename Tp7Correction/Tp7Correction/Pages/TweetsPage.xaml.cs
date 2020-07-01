@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Tp7Correction.Services;
+using GalaSoft.MvvmLight.Messaging;
+using Tp7Correction.ViewModel;
 
 namespace Tp7Correction.Pages
 {
@@ -16,7 +18,12 @@ namespace Tp7Correction.Pages
         public TweetsPage()
         {
             InitializeComponent();
-            this.listView.ItemsSource = new TwitterService().Tweets;
+        }
+
+        protected override void OnAppearing()
+        {
+            Messenger.Default.Send<MessageBase, TweetsPageViewModel>(new MessageBase());
+            base.OnAppearing();
         }
     }
 }

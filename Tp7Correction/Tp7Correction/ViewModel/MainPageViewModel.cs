@@ -38,7 +38,6 @@ namespace Tp7Correction.ViewModel
                             this.navigation.NavigateTo(Configurations.ViewModelLocator.Pages.TweetsPage.ToString());
                         }
                     }
-                    
                 });
             }
         }

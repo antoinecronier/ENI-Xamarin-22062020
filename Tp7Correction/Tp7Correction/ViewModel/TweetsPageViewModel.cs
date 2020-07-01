@@ -3,9 +3,13 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tp7Correction.Entities;
+using Tp7Correction.Models;
+using Tp7Correction.Services;
 using Tp7Correction.Utils;
 
 namespace Tp7Correction.ViewModel
@@ -13,41 +17,66 @@ namespace Tp7Correction.ViewModel
     public class TweetsPageViewModel : ViewModelBase
     {
         private INavigationService navigation;
-        private User user;
+        private ITwitterService twitterService;
+        private bool searchVisibility;
 
-        public User User
+        public ObservableCollection<Tweet> Tweets { get; }
+
+        public bool SearchVisibility
         {
-            get { return user; }
-            set
-            {
-                user = value;
-                //this.RaisePropertyChanged();
+            get { return this.searchVisibility; }
+            set 
+            { 
+                this.searchVisibility = value;
+                this.RaisePropertyChanged();
             }
         }
 
-        public TweetsPageViewModel(INavigationService navigation)
+        public TweetsPageViewModel(INavigationService navigation, ITwitterService twitterService)
         {
-            this.user = new User();
+            this.Tweets = new ObservableCollection<Tweet>();
+            this.SearchVisibility = false;
+
             this.navigation = navigation;
-            Messenger.Default.Register<GenericMessage<User>>(this, NotifyMe);
+            this.twitterService = twitterService;
 
-            Task.Factory.StartNew(() =>
-            {
-                for (int i = 0; i < 20; i++)
-                {
-                    Task.Delay(TimeSpan.FromSeconds(2)).Wait();
-                    User changedUser = new User();
-                    changedUser.Login = RandomUtil.GetString();
-                    changedUser.Password = RandomUtil.GetString();
-
-                    Messenger.Default.Send<GenericMessage<User>, TweetsPageViewModel>(new GenericMessage<User>(changedUser));
-                }
-            });
+            Messenger.Default.Register<MessageBase>(this, PageLoaded);
+            Messenger.Default.Register<GenericMessage<int>>(this, Notifyed);
+            Messenger.Default.Register<GenericMessage<TweetSearch>>(this, SearchNeeded);
         }
-        private void NotifyMe(GenericMessage<User> value)
+
+        private void SearchNeeded(GenericMessage<TweetSearch> msg)
         {
-            this.user.Login = value.Content.Login;
-            this.user.Password = value.Content.Password;
+            this.Tweets.Clear();
+            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(msg.Content.Username)))
+            {
+                this.Tweets.Add(tweet);
+            }
+        }
+
+        private void Notifyed(GenericMessage<int> msg)
+        {
+            switch (msg.Content)
+            {
+                case 1:
+                    this.SearchCliked();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SearchCliked()
+        {
+            this.SearchVisibility = !this.SearchVisibility;
+        }
+
+        private void PageLoaded(MessageBase obj)
+        {
+            foreach (var tweet in this.twitterService.Tweets)
+            {
+                this.Tweets.Add(tweet);
+            }
         }
     }
 }

@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:utils="clr-namespace:Tp7Correction.Utils"
-             x:Class="Tp7Correction.Views.HeaderView">
+             x:Class="Tp7Correction.Views.HeaderView"
+             BindingContext="{Binding HeaderViewModel, Source={StaticResource Locator}}">
     <ContentView.Content>
         <Grid Margin="10, 25">
             <Grid.ColumnDefinitions>
@@ -18,7 +19,7 @@
             </Grid.RowDefinitions>
             <ImageButton Grid.Row="0" Grid.Column="0" Source="{utils:ImageFromResources Tp7Correction.Images.pencil.png}" VerticalOptions="Fill" HorizontalOptions="Fill"></ImageButton>
             <Label Grid.Row="0" Grid.Column="1" TextColor="White" Text="Accueil" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
-            <ImageButton Grid.Row="0" Grid.Column="2" Source="{utils:ImageFromResources Tp7Correction.Images.search.png}"></ImageButton>
+            <ImageButton Grid.Row="0" Grid.Column="2" Command="{Binding SearchClick}" Source="{utils:ImageFromResources Tp7Correction.Images.search.png}"></ImageButton>
         </Grid>
     </ContentView.Content>
 </ContentView>
