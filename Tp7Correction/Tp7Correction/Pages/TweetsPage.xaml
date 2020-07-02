@@ -26,7 +26,8 @@
                     <Button Text="Rechercher" Command="{Binding SearchClick}"/>
                 </StackLayout>
             </ContentView>
-            <ListView ItemsSource="{Binding Tweets}">
+            <ListView ItemsSource="{Binding Tweets}"
+                      HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

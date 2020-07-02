@@ -10,7 +10,8 @@
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView BackgroundColor="#58B0F0"/>
-            <ListView x:Name="listView">
+            <ListView x:Name="listView"
+                      HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
