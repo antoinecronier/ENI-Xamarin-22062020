@@ -1,3 +1,4 @@
+Temps estimé 5 heures
 En repartant de la correction du TP6.
 Dans la vue de liste des tweets et seulement dans cette vue mettre en place la fonction
  de recherche de tweet.

@@ -1,0 +1,6 @@
+Temps estimé 1 heure
+En repartant de la correction du TP7.
+Avec les même principes que pour le TP7, mettre en place la vue de création d'un Tweet comme pour la recherche de Tweet.
+ Il doit être construit en lui assignant l'utilisateur couramment connecté, la seule information
+ que l'utilisateur doit renseigner est le contenu textuel du Tweet. Une fois créer le Tweet doit
+ être sauvegardé dans la base de données.

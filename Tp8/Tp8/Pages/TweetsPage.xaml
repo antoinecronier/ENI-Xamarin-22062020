@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:utils="clr-namespace:Tp8.Utils"
+             xmlns:views="clr-namespace:Tp8.Views"
+             x:Class="Tp8.Pages.TweetsPage"
+             BindingContext="{Binding TweetsPageViewModel, Source={StaticResource Locator}}">
+    <ContentPage.Content>
+        <StackLayout>
+            <views:HeaderView BackgroundColor="#58B0F0"/>
+            <ContentView IsVisible="{Binding SearchVisibility}">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding Search.SearchDate}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <CheckBox IsChecked="{Binding Search.SearchDateChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Utilisateur" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <Entry Text="{Binding Search.Username}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <CheckBox IsChecked="{Binding Search.UsernameChecked}" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Button Text="Rechercher" Command="{Binding SearchClick}"/>
+                </StackLayout>
+            </ContentView>
+            <ListView ItemsSource="{Binding Tweets}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout>
+                                    <ContentView>
+                                        <!--<Grid HorizontalOptions="FillAndExpand">-->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="75"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Image Source="https://picsum.photos/50/50/?random.jpg" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
+                                            <Label Text="{Binding User.Login}" Grid.Row="0" Grid.Column="1"></Label>
+                                            <Label Text="{Binding User.Password}" Grid.Row="0" Grid.Column="2"></Label>
+                                            <Label Text="{Binding CreatedAt}" TextColor="Gray" Grid.Row="0" Grid.Column="3"></Label>
+                                            <Label Text="{Binding Data}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></Label>
+                                        </Grid>
+                                    </ContentView>
+                                    <!--<ContentView HorizontalOptions="FillAndExpand" VerticalOptions="Fill">-->
+                                    <ContentView>
+                                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">-->
+                                        <StackLayout Orientation="Horizontal" HeightRequest="30">
+                                            <ImageButton Source="{utils:ImageFromResources Tp8.Images.reply.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                            <ImageButton Source="{utils:ImageFromResources Tp8.Images.retweet.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                            <ImageButton Source="{utils:ImageFromResources Tp8.Images.favorite.png}" HorizontalOptions="CenterAndExpand"></ImageButton>
+                                        </StackLayout>
+                                    </ContentView>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <views:FooterView/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
