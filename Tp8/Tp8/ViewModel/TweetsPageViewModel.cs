@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tp8.Database;
 using Tp8.Entities;
 using Tp8.Models;
 using Tp8.Services;
@@ -20,6 +21,8 @@ namespace Tp8.ViewModel
         private INavigationService navigation;
         private ITwitterService twitterService;
         private bool searchVisibility;
+        private bool createVisibility;
+        private String tweetText;
 
         public ObservableCollection<Tweet> Tweets { get; }
 
@@ -32,6 +35,27 @@ namespace Tp8.ViewModel
                 this.RaisePropertyChanged();
             }
         }
+
+        public bool CreateVisibility
+        {
+            get { return createVisibility; }
+            set 
+            { 
+                createVisibility = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public String TweetText
+        {
+            get { return tweetText; }
+            set 
+            { 
+                tweetText = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public TweetSearch Search { get; }
 
         public RelayCommand SearchClick
@@ -48,35 +72,55 @@ namespace Tp8.ViewModel
                         bool dateSearch = this.Search.SearchDateChecked;
                         String username = this.Search.Username;
                         DateTime dateTime = this.Search.SearchDate;
+                        List<Tweet> tweets = new List<Tweet>();
 
                         if (usernameSearch && dateSearch)
                         {
-                            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1))
-                            {
-                                this.Tweets.Add(tweet);
-                            }
+                            tweets = this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1).ToList();
                         }
                         else if (usernameSearch)
                         {
-                            foreach (var tweet in this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)))
-                            {
-                                this.Tweets.Add(tweet);
-                            }
+                            tweets = this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)).ToList();
                         }
                         else if (dateSearch)
                         {
-                            foreach (var tweet in this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1))
-                            {
-                                this.Tweets.Add(tweet);
-                            }
+                            tweets = this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1).ToList();
                         }
                         else
                         {
-                            foreach (var tweet in this.twitterService.Tweets)
-                            {
-                                this.Tweets.Add(tweet);
-                            }
+                            tweets = this.twitterService.Tweets;
                         }
+
+                        foreach (var tweet in tweets.OrderByDescending(x => x.CreatedAt))
+                        {
+                            this.Tweets.Add(tweet);
+                        }
+                    }
+                });
+            }
+        }
+
+        public RelayCommand TweetCreateClick
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (!String.IsNullOrWhiteSpace(this.TweetText))
+                    {
+                        User currentUser = this.twitterService.ConnectedUser;
+                        Tweet tweet = new Tweet() { User = currentUser, CreatedAt = DateTime.Now, Data = this.TweetText };
+
+                        using (var db = new AppDbContext())
+                        {
+                            db.Users.Find(currentUser.Id);
+                            db.Tweets.Add(tweet);
+                            db.SaveChanges();
+                        }
+
+                        this.Tweets.Add(tweet);
+                        this.Tweets.Move(this.Tweets.Count - 1, 0);
+                        this.CreateCliked();
                     }
                 });
             }
@@ -103,9 +147,18 @@ namespace Tp8.ViewModel
                 case 1:
                     this.SearchCliked();
                     break;
+                case 2:
+                    this.CreateCliked();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void CreateCliked()
+        {
+            this.TweetText = "";
+            this.CreateVisibility = !this.CreateVisibility;
         }
 
         private void SearchCliked()
@@ -115,7 +168,7 @@ namespace Tp8.ViewModel
 
         private void PageLoaded(MessageBase obj)
         {
-            foreach (var tweet in this.twitterService.Tweets)
+            foreach (var tweet in this.twitterService.Tweets.OrderByDescending(x => x.CreatedAt))
             {
                 this.Tweets.Add(tweet);
             }

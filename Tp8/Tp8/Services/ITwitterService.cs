@@ -9,5 +9,6 @@ namespace Tp8.Services
     {
         Boolean Authenticate(User user);
         List<Tweet> Tweets { get; }
+        User ConnectedUser { get; set; }
     }
 }

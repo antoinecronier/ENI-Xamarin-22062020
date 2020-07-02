@@ -25,6 +25,20 @@ namespace Tp8.ViewModel
             }
         }
 
+        public RelayCommand CreateClick
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (this.navigation.CurrentPageKey == Configurations.ViewModelLocator.Pages.TweetsPage.ToString())
+                    {
+                        Messenger.Default.Send<GenericMessage<int>, TweetsPageViewModel>(new GenericMessage<int>(2));
+                    }
+                });
+            }
+        }
+
         public HeaderViewModel(INavigationService navigation)
         {
             this.navigation = navigation;

@@ -67,6 +67,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ContentView IsVisible="{Binding CreateVisibility}">
+                <StackLayout>
+                    <Entry Placeholder="Votre idée" Text="{Binding TweetText, Mode=TwoWay}" HeightRequest="120"/>
+                    <Button Text="Tweeter" Command="{Binding TweetCreateClick}"/>
+                </StackLayout>
+            </ContentView>
             <views:FooterView/>
         </StackLayout>
     </ContentPage.Content>

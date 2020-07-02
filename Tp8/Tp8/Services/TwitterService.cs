@@ -10,6 +10,8 @@ namespace Tp8.Services
 {
     public class TwitterService : ITwitterService
     {
+        private User user;
+
         public List<Tweet> Tweets
         {
             get
@@ -24,9 +26,27 @@ namespace Tp8.Services
             }
         }
 
+        public User ConnectedUser { get => this.user; set => this.user = value; }
+
+        public TwitterService()
+        {
+            this.user = new User();
+        }
+
         public Boolean Authenticate(User user)
         {
-            return Tweets.Select(x => x.User).Any(x => x.Login == user.Login && x.Password == user.Password);
+            Boolean result = false;
+            using (var db = new AppDbContext())
+            {
+                user = db.Users.FirstOrDefault(x => x.Login.Equals(user.Login) && x.Password.Equals(user.Password));
+            }
+
+            if (user != null)
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

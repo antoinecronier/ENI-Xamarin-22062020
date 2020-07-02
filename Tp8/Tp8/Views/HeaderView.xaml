@@ -17,7 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <ImageButton Grid.Row="0" Grid.Column="0" Source="{utils:ImageFromResources Tp8.Images.pencil.png}" VerticalOptions="Fill" HorizontalOptions="Fill"></ImageButton>
+            <ImageButton Grid.Row="0" Grid.Column="0" Command="{Binding CreateClick}" Source="{utils:ImageFromResources Tp8.Images.pencil.png}" VerticalOptions="Fill" HorizontalOptions="Fill"></ImageButton>
             <Label Grid.Row="0" Grid.Column="1" TextColor="White" Text="Accueil" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
             <ImageButton Grid.Row="0" Grid.Column="2" Command="{Binding SearchClick}" Source="{utils:ImageFromResources Tp8.Images.search.png}"></ImageButton>
         </Grid>

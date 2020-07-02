@@ -34,6 +34,7 @@ namespace Tp8.ViewModel
                     {
                         if (this.navigation.CurrentPageKey == Configurations.ViewModelLocator.Pages.MainPage.ToString())
                         {
+                            this.twitterService.ConnectedUser = this.User;
                             this.navigation.NavigateTo(Configurations.ViewModelLocator.Pages.TweetsPage.ToString());
                         }
                     }
