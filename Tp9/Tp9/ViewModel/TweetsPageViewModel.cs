@@ -70,25 +70,10 @@ namespace Tp9.ViewModel
                         bool usernameSearch = this.Search.UsernameChecked;
                         bool dateSearch = this.Search.SearchDateChecked;
                         String username = this.Search.Username;
-                        DateTime dateTime = this.Search.SearchDate;
-                        List<Tweet> tweets = new List<Tweet>();
-
-                        if (usernameSearch && dateSearch)
-                        {
-                            tweets = this.twitterService.Tweets.Where(x => x.User.Login.Equals(username) && DateTime.Compare(x.CreatedAt, dateTime) < 1).ToList();
-                        }
-                        else if (usernameSearch)
-                        {
-                            tweets = this.twitterService.Tweets.Where(x => x.User.Login.Equals(username)).ToList();
-                        }
-                        else if (dateSearch)
-                        {
-                            tweets = this.twitterService.Tweets.Where(x => DateTime.Compare(x.CreatedAt, dateTime) < 1).ToList();
-                        }
-                        else
-                        {
-                            tweets = this.twitterService.Tweets;
-                        }
+                        DateTime? dateTime = this.Search.SearchDate;
+                        List<Tweet> tweets = this.twitterService.GetTweets(
+                            usernameSearch ? username : null,
+                            dateSearch ? dateTime : null);
 
                         foreach (var tweet in tweets.OrderByDescending(x => x.CreatedAt))
                         {
@@ -167,7 +152,7 @@ namespace Tp9.ViewModel
 
         private void PageLoaded(MessageBase obj)
         {
-            foreach (var tweet in this.twitterService.Tweets.OrderByDescending(x => x.CreatedAt))
+            foreach (var tweet in this.twitterService.GetTweets().OrderByDescending(x => x.CreatedAt))
             {
                 this.Tweets.Add(tweet);
             }
